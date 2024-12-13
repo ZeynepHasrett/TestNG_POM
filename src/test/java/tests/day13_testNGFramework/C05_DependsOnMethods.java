@@ -1,11 +1,18 @@
 package tests.day13_testNGFramework;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import utilities.Driver;
+
 public class C05_DependsOnMethods {
 
     // 3 farkli test method'u olusturup asagidaki gorevleri yapin
-    //  1- testotomasyonu ana sayfaya gidip url'in testotomasyonu icerdigini test edin
-    //  2- phone icin arama yapip urun bulunabildigini test edin
-    //  3- ilk urunu tiklayip urun isminde case sensitive olmadan phone bulundugunu test edin
+    //      1- testotomasyonu ana sayfaya gidip url'in testotomasyonu icerdigini test edin
+    //      2- phone icin arama yapip urun bulunabildigini test edin
+    //      3- ilk urunu tiklayip urun isminde case sensitive olmadan phone bulundugunu test edin
 
         /*
             dependsOnMethods = "anasayfaTesti"
@@ -31,5 +38,52 @@ public class C05_DependsOnMethods {
                once bagli oldugu method'un calismasini saglayacagi icin
                otomatik olarak bir siralama da yapmis olur
          */
+
+    @Test
+    public void anasayfaTesti() {
+        // testotomasyonu ana sayfaya gidip
+        Driver.getDriver().get("https://www.testotomasyonu.com");
+
+        // url'in testotomasyonu icerdigini test edin
+        String expectedUrlIcerik = "testotomasyonu";
+        String actualUrlIcerik = Driver.getDriver().getCurrentUrl();
+
+        Assert.assertTrue(actualUrlIcerik.contains(expectedUrlIcerik));
+
+    }
+
+    @Test(dependsOnMethods = "anasayfaTesti")
+    public void phoneAramaTesti() {
+        // phone icin arama yapip
+        WebElement aramaKutusu = Driver.getDriver().findElement(By.id("global-search"));
+        aramaKutusu.sendKeys("phone" + Keys.ENTER);
+
+        // urun bulunabildigini test edin
+        WebElement aramaSonucuElementi = Driver.getDriver().findElement(By.className("product-count-text"));
+
+        String unexpectedAramaSonucu = "0 Products Found";
+        String actualAramaSonucu = aramaSonucuElementi.getText();
+
+        Assert.assertNotEquals(actualAramaSonucu, unexpectedAramaSonucu);
+
+    }
+
+    @Test(dependsOnMethods = "phoneAramaTesti")
+    public void ilkUrunIsimTesti() {
+        // ilk urunu tiklayip
+        Driver.getDriver().findElement(By.xpath("(//*[@class='prod-img'])[1]"))
+                .click();
+
+        // urun isminde case sensitive olmadan phone bulundugunu test edin
+        String expectedIsimIcerik = "phone";
+        String actualUrunIsmi = Driver.getDriver().findElement(By.xpath("//div[@class=' heading-sm mb-4']"))
+                .getText()
+                .toLowerCase();
+
+        Assert.assertTrue(actualUrunIsmi.contains(expectedIsimIcerik));
+
+        Driver.quitDriver();
+
+    }
 
 }

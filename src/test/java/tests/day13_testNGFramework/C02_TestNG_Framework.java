@@ -1,5 +1,8 @@
 package tests.day13_testNGFramework;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import utilities.Driver;
 
@@ -31,11 +34,10 @@ public class C02_TestNG_Framework {
         Driver.getDriver().get("https://www.testotomasyonu.com");
 
         // arama kutusunu locate edip
-
+        WebElement aramaKutusu = Driver.driver.findElement(By.id("global-search"));
 
         // phone icin arama yapin
-
-
+        aramaKutusu.sendKeys("phone" + Keys.ENTER);
 
         Driver.quitDriver();
 
