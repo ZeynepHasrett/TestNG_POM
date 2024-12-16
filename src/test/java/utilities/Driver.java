@@ -7,6 +7,11 @@ import java.time.Duration;
 
 public class Driver {
 
+    private Driver(){
+        // Singleton pattern ile bu class'dan obje olusturulmasini engellemek icin
+        // Constructor'i gorunur yapip kimsenin erisememesi icin private isaretliyoruz
+    }
+
     public static WebDriver driver;
 
     public static WebDriver getDriver(){
@@ -20,12 +25,23 @@ public class Driver {
             sonraki kullanimlarda calismasin istiyoruz
          */
 
+        /*
+            Driver'in her seferinde chrome olmasi yerine
+            configuration.properties'de browser key'inin degeri ne ise
+            browser'in dinamik olarak o deger olmasini istiyoruz
+
+            browser'in dinamik olmasi icin
+            once configuration.properties'deki browser degerini alalim
+            ve bir switch ile hangi browser istenmis ise
+            ona ait bir WebDriver olusturalim
+         */
+
         if (driver == null) {
             driver = new ChromeDriver();
-        }
 
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        }
 
         return driver;
     }
