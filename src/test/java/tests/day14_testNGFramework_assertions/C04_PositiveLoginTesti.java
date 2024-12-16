@@ -1,5 +1,14 @@
 package tests.day14_testNGFramework_assertions;
 
+import com.github.javafaker.Faker;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.TestotomasyonuPage;
+import utilities.ConfigReader;
+import utilities.Driver;
+
 public class C04_PositiveLoginTesti {
     /*
         Testlerimizi DINAMIK yapmak
@@ -9,9 +18,9 @@ public class C04_PositiveLoginTesti {
 
         Java ile o bilgilere ulasmak icin
         once dosya yolunu almamiz
-        sonra oradaki bilgileri okumamiz
+        sonra oradaki bilgileri okumamiz,
         bilgiler icerisinde ihtiyacimiz olan "toUrl", "toGecerliEmail"
-        gibi bilgileri diger bilgilerden ayiriıp
+        gibi bilgileri diger bilgilerden ayirip
         alip bu test class'ina getirmemiz tek satirla olabilecek bir islem degildir
 
         Bu uzun islemi bizim adimiza yapip
@@ -19,25 +28,78 @@ public class C04_PositiveLoginTesti {
         karsisindaki value'leri alip bize getirecek hazir bir method olusturalim
      */
 
-    // 1- https://www.testotomasyonu.com/ anasayfasina gidin
+    @Test
+    public void positiveLoginTesti() {
+        // 1- https://www.testotomasyonu.com/ anasayfasina gidin
+        Driver.getDriver().get("https://www.testotomasyonu.com/");
 
+        // 2- account linkine basin
+        TestotomasyonuPage testotomasyonuPage = new TestotomasyonuPage();
 
-    // 2- account linkine basin
+        testotomasyonuPage.accountLinki
+                            .click();
 
+        // 3- Kullanici email'i olarak gecerli email girin
+        testotomasyonuPage.emailKutusu.sendKeys("wise@gmail.com");
 
-    // 3- Kullanici email'i olarak gecerli email girin
+        // 4- Kullanici sifresi olarak gecerli password girin
+        testotomasyonuPage.passwordKutusu.sendKeys("12345");
 
+        // 5- Login butonuna basarak login olun
+        Actions actions = new Actions(Driver.getDriver());
+        actions.sendKeys(Keys.PAGE_DOWN).perform();
 
-    // 4- Kullanici sifresi olarak gecerli password girin
+        testotomasyonuPage.loginButonu
+                            .click();
 
+        // 6- Basarili olarak giris yapilabildigini test edin
+        actions.sendKeys(Keys.PAGE_DOWN).perform();
 
-    // 5- Login butonuna basarak login olun
+        Assert.assertTrue(testotomasyonuPage.logoutButonu.isDisplayed());
 
+        // 7- logout olun
+        testotomasyonuPage.logoutButonu
+                            .click();
 
-    // 6- Basarili olarak giris yapilabildigini test edin
+        Driver.quitDriver();
 
+    }
 
-    // 7- logout olun
+    @Test
+    public void dinamikPositiveLoginTesti(){
+        // 1- https://www.testotomasyonu.com/ anasayfasina gidin
+        Driver.getDriver().get(ConfigReader.getProperty("toUrl"));
 
+        // 2- account linkine basin
+        TestotomasyonuPage testotomasyonuPage = new TestotomasyonuPage();
+
+        testotomasyonuPage.accountLinki
+                            .click();
+
+        // 3- Kullanici email'i olarak gecerli email girin
+        testotomasyonuPage.emailKutusu.sendKeys(ConfigReader.getProperty("toGecerliEmail"));
+
+        // 4- Kullanici sifresi olarak gecerli password girin
+        testotomasyonuPage.passwordKutusu.sendKeys(ConfigReader.getProperty("toGecerliPassword"));
+
+        // 5- Login butonuna basarak login olun
+        Actions actions = new Actions(Driver.getDriver());
+        actions.sendKeys(Keys.PAGE_DOWN).perform();
+
+        testotomasyonuPage.loginButonu
+                            .click();
+
+        // 6- Basarili olarak giris yapilabildigini test edin
+        actions.sendKeys(Keys.PAGE_DOWN).perform();
+
+        Assert.assertTrue(testotomasyonuPage.logoutButonu.isDisplayed());
+
+        // 7- logout olun
+        testotomasyonuPage.logoutButonu
+                            .click();
+
+        Driver.quitDriver();
+
+    }
 
 }

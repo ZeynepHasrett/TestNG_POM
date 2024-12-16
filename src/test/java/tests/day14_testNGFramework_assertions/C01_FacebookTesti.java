@@ -21,7 +21,8 @@ public class C01_FacebookTesti {
 
         facebookPage.emailKutusu.sendKeys(faker.internet().emailAddress());
         facebookPage.passwordKutusu.sendKeys(faker.internet().password());
-        facebookPage.loginButonu.click();
+        facebookPage.loginButonu
+                    .click();
 
         // 5- Basarili giris yapilamadigini test edin
         Assert.assertTrue(facebookPage.loginButonu.isDisplayed());

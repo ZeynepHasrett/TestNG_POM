@@ -24,7 +24,7 @@ public class ConfigReader {
 
     static Properties properties; // configuration.properties'deki tum key-value'ler yuklendi
 
-    static {// static blok herseyden once calisir
+    static { // static blok herseyden once calisir
 
         String dosyaYolu = "configuration.properties";
 

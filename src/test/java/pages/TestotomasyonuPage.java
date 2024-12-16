@@ -3,10 +3,12 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import utilities.Driver;
 
 public class TestotomasyonuPage {
     /*
-        Page class2larinda locate yapabilmesi icin
+        Page class'larinda locate yapabilmesi icin
         WeDriver objemizi bu class'a tanitmamiz gerekiyor
 
         Bu tanitma islemini yapmak icin constructor ici tercih edilmistir
@@ -23,6 +25,10 @@ public class TestotomasyonuPage {
         icersinde initElements() method'u ile WebDriver'i tanitmak olacaktir
      */
 
+    public TestotomasyonuPage(){
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
+
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
@@ -34,5 +40,20 @@ public class TestotomasyonuPage {
 
     @FindBy(xpath = "//div[@class=' heading-sm mb-4']")
     public WebElement ilkUrunSayfasindakiIsimElementi;
+
+    @FindBy(xpath = "(//span[.='Account'])[1]")
+    public WebElement accountLinki;
+
+    @FindBy(id = "email")
+    public WebElement emailKutusu;
+
+    @FindBy(id = "password")
+    public WebElement passwordKutusu;
+
+    @FindBy(id = "submitlogin")
+    public WebElement loginButonu;
+
+    @FindBy(xpath = "//span[.='Logout']")
+    public WebElement logoutButonu;
 
 }

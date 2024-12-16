@@ -1,5 +1,10 @@
 package tests.day14_testNGFramework_assertions;
 
+import org.testng.annotations.Test;
+import utilities.ConfigReader;
+
+import java.sql.Driver;
+
 public class C06_SingletonPattern {
     /*
         Page Object Model (POM)'i dizayn edenler
@@ -14,9 +19,11 @@ public class C06_SingletonPattern {
         obje olusturmayi engellemek icin
      */
 
-    // testotomasyonu anasayfaya gidin
+    @Test
+    public void test01() {
+        // testotomasyonu anasayfaya gidin
 
 
-    //
+    }
 
 }
