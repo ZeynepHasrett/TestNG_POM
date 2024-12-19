@@ -27,7 +27,7 @@ public class C04_Priority {
                esit priority degeri olanlar, kendi iclerinde alfabetik siraya uyarlar
      */
 
-    @Test(priority = 15)
+    @Test(priority = 15, groups = {"smoke", "E2E"})
     public void testotomasyonuTest() {
 
         Driver.getDriver().get("https://www.testotomasyonu.com");
@@ -53,7 +53,7 @@ public class C04_Priority {
         Driver.quitDriver();
     }
 
-    @Test // priority == 0 ==> default deger
+    @Test(groups = "smoke") // priority == 0 ==> default deger
     public void bestbuyTesti() {
 
         Driver.getDriver().get("https://www.bestbuy.com");

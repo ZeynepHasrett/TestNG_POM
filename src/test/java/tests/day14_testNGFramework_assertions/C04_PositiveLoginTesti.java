@@ -28,7 +28,7 @@ public class C04_PositiveLoginTesti {
         karsisindaki value'leri alip bize getirecek hazir bir method olusturalim
      */
 
-    @Test
+    @Test(groups = {"smoke", "Regression", "E2E"})
     public void positiveLoginTesti() {
         // 1- https://www.testotomasyonu.com/ anasayfasina gidin
         Driver.getDriver().get("https://www.testotomasyonu.com/");
@@ -65,7 +65,7 @@ public class C04_PositiveLoginTesti {
 
     }
 
-    @Test
+    @Test(groups = {"smoke", "Regression"})
     public void dinamikPositiveLoginTesti(){
         // 1- https://www.testotomasyonu.com/ anasayfasina gidin
         Driver.getDriver().get(ConfigReader.getProperty("toUrl"));

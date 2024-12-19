@@ -32,7 +32,7 @@ public class C06_SingletonPattern {
 
         //Driver.driver.get(ConfigReader.getProperty("toUrl"));
 
-        Driver.quitDriver();
+        // Driver.quitDriver();
 
     }
 

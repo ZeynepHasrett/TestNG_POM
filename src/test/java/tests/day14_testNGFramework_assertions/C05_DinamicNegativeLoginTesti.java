@@ -21,7 +21,7 @@ public class C05_DinamicNegativeLoginTesti {
 
     static TestotomasyonuPage testotomasyonuPage = new TestotomasyonuPage();
 
-    @Test
+    @Test(groups = "smoke")
     public void gecersizPasswordTesti() {
 
         testotomasyonuPage = new TestotomasyonuPage();
@@ -52,7 +52,7 @@ public class C05_DinamicNegativeLoginTesti {
 
     }
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void gecersizEmailTesti() {
 
         testotomasyonuPage = new TestotomasyonuPage();
@@ -83,7 +83,7 @@ public class C05_DinamicNegativeLoginTesti {
 
     }
 
-    @Test
+    @Test(groups = {"smoke", "E2E"})
     public void gecersizEmailVePasswordTesti() {
 
         testotomasyonuPage = new TestotomasyonuPage();

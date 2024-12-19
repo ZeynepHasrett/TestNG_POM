@@ -10,7 +10,7 @@ import utilities.Driver;
 
 public class C02_SoftAssertion {
 
-    @Test
+    @Test(groups = "smoke")
     public void softAssertionTesti(){
         // testotomasyonu anasayfaya gidin
         Driver.getDriver().get(ConfigReader.getProperty("toUrl"));
