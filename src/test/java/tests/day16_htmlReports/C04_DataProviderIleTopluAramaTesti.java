@@ -12,14 +12,30 @@ public class C04_DataProviderIleTopluAramaTesti {
 
     /*
         Data provider ile verilen bir listedeki her bir deger icin
-        testi method'unu bagimsiz olarak calistirabiliriz
+        test method'unu bagimsiz olarak calistirabiliriz
 
         DataProvider ile test yapabilmek icin
-        once test method'umuzu parametre ile calisacak sekilde
-        tek bir urun icin yazalim
+        1- once test methodumuzu parametre ile calisacak sekilde
+           tek bir urun icin yazalim
+
+        2- Test method'una disardan bir dataProvider tanimlayalim
+
+        3- yazdigimiz data provider isminin ustune yaklasip
+           intelliJ'in data provider'i olusturmasini isteyelim
+
+        4- data provider, @DataProvider notasyonuna sahip ozel bir method'dur
+           MUTLAKA iki katli bir Object Array DONDURMELIDIR
      */
 
-    @Test
+    @DataProvider
+    public static Object[][] UrunProvideri() {
+
+        String[][] urunlerArrayi = {{"phone"}, {"java"}, {"dress"}, {"baby"}, {"nutella"}, {"samsung"}, {"iphone"}, {"shirt"}};
+
+        return urunlerArrayi;
+    }
+
+    @Test(dataProvider = "UrunProvideri")
     public void aramaTesti(String aranacakUrun) {
         // testotomasyonu sayfasina gidin
         Driver.getDriver().get(ConfigReader.getProperty("toUrl"));
@@ -34,6 +50,8 @@ public class C04_DataProviderIleTopluAramaTesti {
         String actualAramaSonucYazisi = testotomasyonuPage.aramaSonucuElementi.getText();
 
         Assert.assertNotEquals(actualAramaSonucYazisi, unexpectedAramaSonucu, aranacakUrun + " bulunamadi");
+
+        Driver.quitDriver();
 
     }
 
