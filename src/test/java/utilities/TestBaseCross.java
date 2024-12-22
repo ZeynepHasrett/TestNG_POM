@@ -20,11 +20,13 @@ public class TestBaseCross {
 
     @BeforeMethod
     public void setUp(@Optional String kullanilacakBrowser){
+
         driver= DriverCross.getDriver(kullanilacakBrowser);
     }
 
     @AfterMethod
     public void tearDown(){
+
         DriverCross.quitDriver();
     }
 
